@@ -1,0 +1,40 @@
+{
+  "home": {
+    "head": [
+      {
+        "url": "/js/test.js",
+        "async": true,
+        "defer": true
+      }
+    ],
+    "body": [
+      {
+        "url": "https://www.example.com/body-home.js",
+        "defer": true
+      }
+    ]
+  },
+  "checkout": {},
+  "global": {
+    "head": [
+      {
+        "url": "https://example.com/head-global.js",
+        "async": true,
+        "defer": true
+      },
+      {
+        "url": "/js/head-global2.js"
+      }
+    ],
+    "body": [
+      {
+        "url": "js/body-global.js",
+        "async": true,
+        "defer": true
+      },
+      {
+        "url": "https://example.com/body-global2.js"
+      }
+    ]
+  }
+}

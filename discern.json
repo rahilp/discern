@@ -1,39 +1,60 @@
 {
   "home": {
-    "head": [
-      {
-        "url": "/js/test.js",
-        "async": true,
-        "defer": true
-      }
-    ],
+    "head": [],
+    "body": []
+  },
+  "checkout": {
     "body": [
       {
-        "url": "https://www.example.com/body-home.js",
-        "defer": true
+        "url": "https://www.paypalobjects.com/api/checkout.js"
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/shared/js/checkout.js"
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/minifiedversion/js/acc.cartremoveitem.js"
       }
     ]
   },
-  "checkout": {},
   "global": {
-    "head": [
-      {
-        "url": "https://example.com/head-global.js",
-        "async": true,
-        "defer": true
-      },
-      {
-        "url": "/js/head-global2.js"
-      }
-    ],
+    "head": [],
     "body": [
       {
-        "url": "js/body-global.js",
-        "async": true,
-        "defer": true
+        "url": "https://vmss.boldchat.com/aid/582395174734209285/bc.vms4/vms.js",
+        "defer": true,
+        "exclude": []
       },
       {
-        "url": "https://example.com/body-global2.js"
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/modernizr.js",
+        "exclude": ["home", "checkout"]
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/minifiedversion/js/global.js",
+        "exclude": []
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/typeahead.jquery.js",
+        "exclude": []
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/jquery-ui.min.js",
+        "exclude": []
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/featherlight.js",
+        "exclude": []
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/jquery.cycle2.js",
+        "exclude": []
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/jquery.cycle2.carousel.js",
+        "exclude": []
+      },
+      {
+        "url": "https://cdn.ibmstg.napaonline.com/_ui/desktop/common/js/jquery.cycle2.swipe.js",
+        "exclude": []
       }
     ]
   }

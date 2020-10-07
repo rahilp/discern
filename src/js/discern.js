@@ -2,6 +2,8 @@ function discern(o) {
   var bodyTag = document.getElementsByTagName('BODY')[0]
   var pageType = bodyTag.getAttribute('data-discern')
   var cb = ''
+  var event = new Event('discernDataLoaded')
+  var scriptData = null
 
   if (o.cacheBust === true && typeof o.cacheBustString) {
     cb = '?v=' + o.cacheBustString
@@ -16,58 +18,70 @@ function discern(o) {
       }
 
       response.json().then(function (data) {
-        if (Object.prototype.hasOwnProperty.call(data, pageType)) {
-          var pageScripts = data[pageType] // Global Scripts
-
-          for (var globalScript in data['global']) {
-            for (var obj in data['global'][globalScript]) {
-              var urlData = data['global'][globalScript][obj]
-              var globalscriptElem = document.createElement('script')
-              globalscriptElem.src = urlData.url + cb
-
-              if (urlData.async) {
-                globalscriptElem.setAttribute('async', '')
-              }
-
-              if (urlData.defer) {
-                globalscriptElem.setAttribute('defer', '')
-              }
-
-              if (globalScript === 'head') {
-                document.head.appendChild(globalscriptElem)
-              } else {
-                document.body.appendChild(globalscriptElem)
-              }
-            }
-          } // Page Specific Scripts
-
-          for (var section in pageScripts) {
-            var sectionScript = pageScripts[section]
-
-            for (var scriptName in sectionScript) {
-              var urlPageData = pageScripts[section][scriptName]
-              var scriptElm = document.createElement('script')
-              scriptElm.src = urlPageData.url + cb
-
-              if (urlPageData.async) {
-                scriptElm.setAttribute('async', '')
-              }
-
-              if (urlPageData.defer) {
-                scriptElm.setAttribute('defer', '')
-              }
-
-              if (section === 'head') {
-                document.head.appendChild(scriptElm)
-              } else {
-                document.body.appendChild(scriptElm)
-              }
-            }
-          }
-        }
+        // Set response as variable availble outside response
+        scriptData = data
+        // Dispatch the discernDataLoaded event
+        window.dispatchEvent(event)
       })
     })
     .catch(function (err) {
       console.error('Fetch Error :-S', err)
     })
+
+  // Listen for DiscernDataLoaded Event
+  window.addEventListener(
+    'discernDataLoaded',
+    function (e) {
+      if (Object.prototype.hasOwnProperty.call(scriptData, pageType)) {
+        var pageScripts = scriptData[pageType] // Global Scripts
+
+        for (var globalScript in scriptData['global']) {
+          for (var obj in scriptData['global'][globalScript]) {
+            var urlData = scriptData['global'][globalScript][obj]
+            var globalscriptElem = document.createElement('script')
+            globalscriptElem.src = urlData.url + cb
+
+            if (urlData.async) {
+              globalscriptElem.setAttribute('async', '')
+            }
+
+            if (urlData.defer) {
+              globalscriptElem.setAttribute('defer', '')
+            }
+
+            if (globalScript === 'head') {
+              document.head.appendChild(globalscriptElem)
+            } else {
+              document.body.appendChild(globalscriptElem)
+            }
+          }
+        } // Page Specific Scripts
+
+        for (var section in pageScripts) {
+          var sectionScript = pageScripts[section]
+
+          for (var scriptName in sectionScript) {
+            var urlPageData = pageScripts[section][scriptName]
+            var scriptElm = document.createElement('script')
+            scriptElm.src = urlPageData.url + cb
+
+            if (urlPageData.async) {
+              scriptElm.setAttribute('async', '')
+            }
+
+            if (urlPageData.defer) {
+              scriptElm.setAttribute('defer', '')
+            }
+
+            if (section === 'head') {
+              document.head.appendChild(scriptElm)
+            } else {
+              document.body.appendChild(scriptElm)
+            }
+          }
+        }
+      }
+    },
+    false
+  )
 }

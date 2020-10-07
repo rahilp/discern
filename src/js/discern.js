@@ -38,24 +38,28 @@ function discern(o) {
         for (var globalScript in scriptData['global']) {
           for (var obj in scriptData['global'][globalScript]) {
             var urlData = scriptData['global'][globalScript][obj]
-            var globalscriptElem = document.createElement('script')
-            globalscriptElem.src = urlData.url + cb
+            var exclude = urlData.exclude
+            if (exclude && !exclude.includes(pageType)) {
+              var globalscriptElem = document.createElement('script')
+              globalscriptElem.src = urlData.url + cb
 
-            if (urlData.async) {
-              globalscriptElem.setAttribute('async', '')
-            }
+              if (urlData.async) {
+                globalscriptElem.setAttribute('async', '')
+              }
 
-            if (urlData.defer) {
-              globalscriptElem.setAttribute('defer', '')
-            }
-
-            if (globalScript === 'head') {
-              document.head.appendChild(globalscriptElem)
-            } else {
-              document.body.appendChild(globalscriptElem)
+              if (urlData.defer) {
+                globalscriptElem.setAttribute('defer', '')
+              }
+              if (globalScript === 'head') {
+                document.head.appendChild(globalscriptElem)
+              } else {
+                document.body.appendChild(globalscriptElem)
+              }
             }
           }
-        } // Page Specific Scripts
+        }
+
+        // Page Specific Scripts
 
         for (var section in pageScripts) {
           var sectionScript = pageScripts[section]

@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-// eslint-disable-next-line no-unused-vars
-function discern (o) {
+function discern(o) {
   var bodyTag = document.getElementsByTagName('BODY')[0]
   var pageType = bodyTag.getAttribute('data-discern')
   var cb = ''

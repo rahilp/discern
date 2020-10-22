@@ -1,8 +1,10 @@
-function discern(o) {
+/* eslint-disable no-console */
+// eslint-disable-next-line no-unused-vars
+function discern (o) {
   var bodyTag = document.getElementsByTagName('BODY')[0]
   var pageType = bodyTag.getAttribute('data-discern')
   var cb = ''
-  var event = new Event('discernDataLoaded')
+  var discernEvent = new Event('discernDataLoaded')
   var scriptData = null
 
   if (o.cacheBust === true && typeof o.cacheBustString) {
@@ -21,7 +23,7 @@ function discern(o) {
         // Set response as variable availble outside response
         scriptData = data
         // Dispatch the discernDataLoaded event
-        window.dispatchEvent(event)
+        window.dispatchEvent(discernEvent)
       })
     })
     .catch(function (err) {
@@ -31,9 +33,9 @@ function discern(o) {
   // Listen for DiscernDataLoaded Event
   window.addEventListener(
     'discernDataLoaded',
-    function (e) {
+    function () {
       if (Object.prototype.hasOwnProperty.call(scriptData, pageType)) {
-        var pageScripts = scriptData[pageType] // Global Scripts
+        var pageScripts = scriptData[pageType] // Determine and set Page Type
 
         for (var globalScript in scriptData['global']) {
           for (var obj in scriptData['global'][globalScript]) {

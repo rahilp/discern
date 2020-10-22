@@ -1,5 +1,5 @@
 {
-  "home": {
+  "pageType-ContentPage": {
     "head": [],
     "body": []
   },
@@ -17,12 +17,7 @@
     ]
   },
   "global": {
-    "head": [
-      {
-        "url": "https://test.com/script.js",
-        "exclude": []
-      }
-    ],
+    "head": [],
     "body": [
       {
         "url": "https://vmss.boldchat.com/aid/582395174734209285/bc.vms4/vms.js",

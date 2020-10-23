@@ -1,4 +1,17 @@
 {
-  "presets": ["@babel/preset-env", "minify"],
-  "comments": false
+  "presets": [
+    "@babel/preset-env",
+    [
+      "minify",
+      {
+        "evaluate": false,
+        "mangle": true,
+        "deadcode": true
+      }
+    ]
+  ],
+  "comments": false,
+  "parserOpts": {
+    "plugins": ["minify-mangle-names", "minify-constant-folding", ["minify-dead-code-elimination", { "optimizeRawSize": true }]]
+  }
 }

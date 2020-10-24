@@ -1,4 +1,4 @@
-function discern(o) {
+const discern = (o) => {
   var bodyTag = document.getElementsByTagName('BODY')[0]
   var pageType = bodyTag.getAttribute('data-discern')
   var cb = ''
@@ -39,7 +39,7 @@ function discern(o) {
           for (var obj in scriptData['global'][globalScript]) {
             var urlData = scriptData['global'][globalScript][obj]
             var exclude = urlData.exclude
-            if (exclude && !exclude.includes(pageType)) {
+            if ((urlData.hasOwnProperty('exclude') && !exclude.includes(pageType)) || !urlData.hasOwnProperty('exclude')) {
               var globalscriptElem = document.createElement('script')
               globalscriptElem.src = urlData.url + cb
 

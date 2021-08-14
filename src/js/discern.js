@@ -39,7 +39,7 @@ const discern = (o) => {
           for (var obj in scriptData['global'][globalScript]) {
             var urlData = scriptData['global'][globalScript][obj]
             var exclude = urlData.exclude
-            if ((urlData.hasOwnProperty('exclude') && !exclude.includes(pageType)) || !urlData.hasOwnProperty('exclude')) {
+            if ((Object.prototype.hasOwnProperty.call(urlData, 'exclude') && !exclude.includes(pageType)) || !Object.prototype.hasOwnProperty.call(urlData, 'exclude')) {
               var globalscriptElem = document.createElement('script')
               globalscriptElem.src = urlData.url + cb
 
